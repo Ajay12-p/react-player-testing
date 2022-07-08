@@ -10,7 +10,7 @@ export default function Home() {
   const [toggle, setToggle] = useState(false)
 
   const currTimeUpdated = () => {
-    //const currTime = player.current.getCurrentTime()
+    //const currTime = player.current.getCurrentTime()       //////// this does not work
     //console.log('current time is: ' + currTime)
     if (toggle) {
       console.log('toggle is set')
@@ -20,11 +20,14 @@ export default function Home() {
     }
   }
 
+  const skip = () => {
+    seekTo(player.current.getCurrentTime() + 10, 'seconds')  /////// this does not work
+  }
+
   const playerElement = <ReactPlayer url='https://www.youtube.com/watch?v=ysz5S6PUM-U'
     ref={player}
     controls={true}      
     onProgress={currTimeUpdated}
-    //onProgress={currTimeUpdated}
   />
   
   return (
@@ -39,6 +42,9 @@ export default function Home() {
         {playerElement}
         <button onClick={() => setToggle(!toggle)}>
           {'toggle is ' + toggle}
+        </button>
+        <button onClick={skip}>
+          Skip ahead 10 seconds
         </button>
       </main>
 
